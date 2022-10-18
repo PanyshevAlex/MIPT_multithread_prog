@@ -1,3 +1,9 @@
+//
+// solution.h
+// 01_MatrixMult
+//
+// Created by Panyshev Alexander on 14.10.2022.
+//
 #pragma once
 
 typedef struct _thread_param{

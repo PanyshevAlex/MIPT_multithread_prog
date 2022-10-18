@@ -1,6 +1,6 @@
 //
 // main.c
-// ff
+// 01_MatrixMult
 //
 // Created by Panyshev Alexander on 14.10.2022.
 //
@@ -24,16 +24,18 @@ int main(int argc, char **argv)
     srand(time(NULL));
     int **a = make_random_matrix(lenght);
     int **b = make_random_matrix(lenght);
-    // printf("matrix a: \n");
-    // print_matrix(a, lenght);
-    // printf("--------------------------------------------\n");
-    // printf("matrix b: \n");
-    // print_matrix(b, lenght);
-    // printf("--------------------------------------------\n");
+    printf("matrix a: \n");
+    print_matrix(a, lenght);
+    printf("--------------------------------------------\n");
+    printf("matrix b: \n");
+    print_matrix(b, lenght);
+    printf("--------------------------------------------\n");
     int **c = naive_matrix_multiplication(a, b, lenght, num_threads);
+    printf("Naive matrix mult\n");
     print_matrix(c, lenght);
     printf("--------------------------------------------\n");
     int **d = block_matrix_multiplication(a, b, lenght, num_threads);
+    printf("Block matrix mult\n");
     print_matrix(d, lenght);
     printf("--------------------------------------------\n");
 
@@ -42,15 +44,26 @@ int main(int argc, char **argv)
     free_matrix(c, lenght);
     free_matrix(d, lenght);
 
-    int **t1 = make_random_matrix(16);
-    printf("matrix t1: \n");
-    print_matrix(t1, 16);
-    printf("--------------------------------------------\n");
-    block t1_block = {t1, 8, 0};
-    block t2_block = {t1, 8, 8};
-    int **tres = one_block_multipy(t1_block, t2_block);
-    printf("matrix tres: \n");
-    print_matrix(tres, 8);
-    printf("--------------------------------------------\n");
+    // время умножения матриц от размера матриц для наивной однопоточной реализации
+    // Графики
+    // FILE *file;
+    // file = fopen("1.txt", "w");
+    // struct timespec start, end;
+    // int lenght = 500;
+    // int **a = make_random_matrix(lenght);
+    // int **b = make_random_matrix(lenght);
+    // for (int i = 1; i <= 8; i++)
+    // {
+    //     clock_gettime(CLOCK_REALTIME, &start);
+    //     int **c = block_matrix_multiplication(a, b, lenght, i);
+    //     clock_gettime(CLOCK_REALTIME, &end);
+    //     printf("thread %d finished\n", i);
+    //     free_matrix(c, lenght);
+    //     double conseq_time = end.tv_sec - start.tv_sec;
+    //     conseq_time += (end.tv_nsec - start.tv_nsec) / (double)1e9;
+    //     fprintf(file, "%d %f\n", i, conseq_time);
+    // }
+    // fclose(file);
+
 	return 0;
 }

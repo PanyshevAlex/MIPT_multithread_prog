@@ -1,3 +1,9 @@
+//
+// solution.c
+// 01_MatrixMult
+//
+// Created by Panyshev Alexander on 14.10.2022.
+//
 #include "solution.h"
 
 #include <stdlib.h>
