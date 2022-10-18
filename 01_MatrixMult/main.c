@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#include <errno.h>
 int main(int argc, char **argv)
 {
 	if (argc != 3)
@@ -19,8 +19,31 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    int lenght = atoi(argv[1]);
-    int num_threads = atoi(argv[2]);
+    // int lenght = atoi(argv[1]);
+    // int num_threads = atoi(argv[2]);
+    char *pend;
+    int lenght = (int)strtol(argv[1], &pend, 10);
+    if (lenght == 0)
+    {
+        perror("Incorrect matrix_lenght");
+        return 1;
+    }
+    if (*pend != '\0')
+    {
+        printf("Invalid matrix_lenght\n");
+        return 1;
+    }
+    int num_threads = (int)strtol(argv[2], &pend, 10);
+    if (num_threads == 0)
+    {
+        perror("Incorrect threads_number");
+        return 1;
+    }
+    if (*pend != '\0')
+    {
+        printf("Invalid threads_number\n");
+        return 1;
+    }
     srand(time(NULL));
     int **a = make_random_matrix(lenght);
     int **b = make_random_matrix(lenght);
